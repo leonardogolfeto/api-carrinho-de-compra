@@ -1,6 +1,6 @@
 package com.apicarrinhodecompra.orders.orderItem;
 
-import com.apicarrinhodecompra.BasicEntity.BasicEntity;
+import com.apicarrinhodecompra.basicentity.BasicEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

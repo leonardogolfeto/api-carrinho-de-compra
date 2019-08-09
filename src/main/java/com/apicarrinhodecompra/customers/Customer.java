@@ -1,7 +1,8 @@
 package com.apicarrinhodecompra.customers;
 
 
-import com.apicarrinhodecompra.BasicEntity.BasicEntity;
+import com.apicarrinhodecompra.basicentity.BasicEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.Entity;
@@ -48,6 +49,7 @@ public class Customer extends BasicEntity {
         return updated_at;
     }
 
+    @JsonIgnore
     public DTOCustomer getDto() {
 
         return new DTOCustomer(id, name, cpf, email);

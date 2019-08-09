@@ -1,6 +1,6 @@
 package com.apicarrinhodecompra.products;
 
-import com.apicarrinhodecompra.BasicEntity.BasicEntity;
+import com.apicarrinhodecompra.basicentity.BasicEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

@@ -1,6 +1,6 @@
 package com.apicarrinhodecompra.orders;
 
-import com.apicarrinhodecompra.BasicEntity.BasicEntity;
+import com.apicarrinhodecompra.basicentity.BasicEntity;
 import com.apicarrinhodecompra.customers.DTOCustomer;
 import com.apicarrinhodecompra.orders.orderItem.DTOOrderItem;
 

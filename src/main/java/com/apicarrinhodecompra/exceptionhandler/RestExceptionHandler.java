@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import javax.persistence.EntityNotFoundException;
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -76,7 +77,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 HttpStatus.BAD_REQUEST.getReasonPhrase(), "HttpMessageNotWritableException", Collections.singletonList(new ObjectError( Objects.requireNonNull(ex.getRootCause()).getMessage(), ex.getRootCause().getLocalizedMessage(), null)));
     }
 
-    @ExceptionHandler(EntityNotFoundException.class)
+    @ExceptionHandler({EntityNotFoundException.class})
     private ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException ex){
         ErrorResponse errorResponse = getErrorEntityNotFoundException(ex);
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
@@ -84,7 +85,20 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     private ErrorResponse getErrorEntityNotFoundException(EntityNotFoundException ex) {
         return new ErrorResponse(ex.getMessage(), HttpStatus.NOT_FOUND.value(),
-                HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                "EntityNotFoundException",
+                Collections.singletonList(new ObjectError(ex.getMessage(), null, null)));
+    }
+
+    @ExceptionHandler({NoSuchElementException.class})
+    private ResponseEntity<Object> handleNoSuchElementException(NoSuchElementException ex){
+        ErrorResponse errorResponse = getErrorNoSuchElementException(ex);
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    private ErrorResponse getErrorNoSuchElementException(NoSuchElementException ex) {
+        return new ErrorResponse(ex.getMessage(), HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
                 "EntityNotFoundException",
                 Collections.singletonList(new ObjectError(ex.getMessage(), null, null)));
     }

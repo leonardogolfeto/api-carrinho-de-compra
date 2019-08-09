@@ -47,13 +47,13 @@ public class OrderService {
     public Order adicionarOrder(DTOOrder dtoOrder) {
 
         Customer customer = customerService.getById(dtoOrder.getBuyer().getId());
-        System.out.println("Adicionando Customer: " + customer.getId() + " na Order.");
+        System.out.println("Adicionando Customer: " + customer.getDto() + " na Order.");
         Order order = repository.save(dtoOrder.getEntity());
 
         for (DTOOrderItem item : dtoOrder.getItems()) {
 
             Product product = productService.getById(item.getProduct().getId());
-            System.out.println("Adicionando Product: " + product.getId() + " No item");
+            System.out.println("Adicionando Product: " + product.getDto() + " No item");
             orderItemService.salvar(
                     item.getEntity(order.getId()));
         }
@@ -62,7 +62,8 @@ public class OrderService {
 
     public Order atualizarStatus(DTOAlteracaoStatusOrder dto) {
 
-        Order order = repository.findById(dto.getOrder_id()).get();
+        Order order = repository.getOne(dto.getOrder_id());
+        System.out.println("Atualizando status na Order: " + order.getId());
         order.setStatus(dto.getStatus());
 
         return repository.save(order);

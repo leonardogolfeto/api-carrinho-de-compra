@@ -1,6 +1,6 @@
 package com.apicarrinhodecompra.orders.orderItem;
 
-import com.apicarrinhodecompra.BasicEntity.BasicQuery;
+import com.apicarrinhodecompra.basicentity.BasicQuery;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.NoResultException;

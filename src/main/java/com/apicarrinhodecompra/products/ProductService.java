@@ -23,5 +23,5 @@ public class ProductService {
         return repository.getOne(orderId).getDto();
     }
 
-    public Product getById(Long id) { return repository.getOne(id); }
+    public Product getById(Long id) { return repository.findById(id).get(); }
 }

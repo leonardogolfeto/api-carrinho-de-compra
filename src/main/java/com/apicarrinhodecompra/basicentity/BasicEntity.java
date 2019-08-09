@@ -1,4 +1,4 @@
-package com.apicarrinhodecompra.BasicEntity;
+package com.apicarrinhodecompra.basicentity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
