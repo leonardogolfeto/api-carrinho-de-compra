@@ -1,6 +1,6 @@
 # Carrinho de compras
 
-##Para executar o projeto:
+### Para executar o projeto:
 
 1- Clone o arquivo para sua pasta de preferencia.
 
@@ -21,7 +21,7 @@ Intellij : File > Open > Navegue até o diretorio em que está o souce do projet
 
 6- Execute a classe "CarrinhoDeCompraApplication" e seja feliz !!
 
-###Observações 
+### Observações 
 
 Os endpoints estão protegidos com basic auth, o ususario e senha padrão é: devninjas, 1234
 
