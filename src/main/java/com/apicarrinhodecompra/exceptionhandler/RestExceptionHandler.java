@@ -7,16 +7,20 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static java.util.Arrays.asList;
 
 @RestControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
@@ -59,5 +63,29 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private ErrorResponse getHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
         return new ErrorResponse(ex.getMessage(), HttpStatus.BAD_REQUEST.value(),
                 HttpStatus.BAD_REQUEST.getReasonPhrase(), "HttpMessageNotReadableException", Collections.singletonList(new ObjectError( Objects.requireNonNull(ex.getRootCause()).getMessage(), ex.getRootCause().getLocalizedMessage(), null)));
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleHttpMessageNotWritable(HttpMessageNotWritableException ex, HttpHeaders headers, HttpStatus status, WebRequest request){
+        ErrorResponse errorResponse = getHttpMessageNotWritableException(ex);
+        return new ResponseEntity<>(errorResponse, status);
+    }
+
+    private ErrorResponse getHttpMessageNotWritableException(HttpMessageNotWritableException ex) {
+        return new ErrorResponse(ex.getMessage(), HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST.getReasonPhrase(), "HttpMessageNotWritableException", Collections.singletonList(new ObjectError( Objects.requireNonNull(ex.getRootCause()).getMessage(), ex.getRootCause().getLocalizedMessage(), null)));
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    private ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException ex){
+        ErrorResponse errorResponse = getErrorEntityNotFoundException(ex);
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    private ErrorResponse getErrorEntityNotFoundException(EntityNotFoundException ex) {
+        return new ErrorResponse(ex.getMessage(), HttpStatus.NOT_FOUND.value(),
+                HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                "EntityNotFoundException",
+                Collections.singletonList(new ObjectError(ex.getMessage(), null, null)));
     }
 }

@@ -1,8 +1,8 @@
 package com.apicarrinhodecompra.orders;
 
-import com.apicarrinhodecompra.customers.Customer;
+import com.apicarrinhodecompra.customers.DTOCustomer;
 import com.apicarrinhodecompra.orders.orderItem.DTOOrderItem;
-import com.apicarrinhodecompra.orders.orderItem.OrderItem;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -13,51 +13,40 @@ public class DTOOrder {
 
     @NotNull()
     private Long id;
-
-    @NotNull()
-    private Long customerId;
-
     @Min(0)
     @NotNull()
     private Double total;
-
     @NotNull()
     private String status;
-
     @NotNull()
-    private Date createdAt;
-
+    private Date created_at;
     @NotNull()
-    private Customer buyer;
-
+    private DTOCustomer buyer;
     @NotNull()
     private List<DTOOrderItem> items;
 
-    public Long getId() {
-        return id;
+    public DTOOrder(@NotNull() Long id, @Min(0) @NotNull() Double total, @NotNull() String status, @NotNull() Date created_at, @NotNull() DTOCustomer buyer, @NotNull() List<DTOOrderItem> items) {
+        this.id = id;
+        this.total = total;
+        this.status = status;
+        this.created_at = created_at;
+        this.buyer = buyer;
+        this.items = items;
     }
 
-    public Long getCustomerId() {
-        return customerId;
-    }
+    public Long getId() { return id; }
+    public Double getTotal() { return total; }
+    public String getStatus() { return status; }
+    public Date getCreated_at() { return created_at; }
+    public DTOCustomer getBuyer() { return buyer; }
+    public List<DTOOrderItem> getItems() { return items; }
 
-    public Double getTotal() {
-        return total;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public Customer getBuyer() {
-        return buyer;
-    }
-
-    public List<DTOOrderItem> getItems() {
-        return items;
+    @JsonIgnore
+    public Order getEntity() {
+        return new Order(
+                this.buyer.getId(),
+                this.total,
+                this.status,
+                this.created_at);
     }
 }

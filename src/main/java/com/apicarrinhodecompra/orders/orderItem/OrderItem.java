@@ -1,39 +1,39 @@
 package com.apicarrinhodecompra.orders.orderItem;
 
+import com.apicarrinhodecompra.BasicEntity.BasicEntity;
+
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "ORDER_ITEM", uniqueConstraints={@UniqueConstraint(columnNames = {"id"})})
-public class OrderItem{
+@Table(name = "ORDER_ITEM", uniqueConstraints = {@UniqueConstraint(columnNames = {"id"})})
+public class OrderItem extends BasicEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
+    @NotNull(message = "Valor orderId é Obrigatório !")
     private Long orderId;
-
-    private Integer productId;
-
-    @Min(0)
+    @NotNull(message = "Valor productId é Obrigatório !")
+    private Long productId;
+    @NotNull(message = "Valor amount é Obrigatório !")
     private Integer amount;
-
-    @Min(0)
+    @NotNull(message = "Valor priceUnit é Obrigatório !")
     private Double priceUnit;
-
-    @Min(0)
+    @NotNull(message = "Valor total é Obrigatório !")
     private Double total;
 
-    public Long getId() {
-        return id;
+    public OrderItem(Long id, Long orderId, Long productId, Integer amount, Double priceUnit, Double total) {
+        this.id = id;
+        this.orderId = orderId;
+        this.productId = productId;
+        this.amount = amount;
+        this.priceUnit = priceUnit;
+        this.total = total;
     }
 
     public Long getOrderId() {
         return orderId;
     }
 
-    public Integer getProductId() {
+    public Long getProductId() {
         return productId;
     }
 

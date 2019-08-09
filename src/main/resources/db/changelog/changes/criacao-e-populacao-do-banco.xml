@@ -4,4 +4,80 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
+    <changeSet id="1" author="leo-master">
+        <sql>
+            insert into product (id, created_at, name, price, sku, updated_at) VALUES (111, now(), 'Jaqueta de Couro',
+            109.84, 8555454, now());
+            insert into product (id, created_at, name, price, sku, updated_at) VALUES (112, now(), 'Sapato de Couro',
+            145.84, 8556454, now());
+            insert into product (id, created_at, name, price, sku, updated_at) VALUES (113, now(), 'Jaleco de Couro',
+            1209.84, 8755454, now());
+            insert into product (id, created_at, name, price, sku, updated_at) VALUES (114, now(), 'Boné de Couro',
+            11209.84, 8585454, now());
+            insert into product (id, created_at, name, price, sku, updated_at) VALUES (115, now(), 'Carteira de Couro',
+            109.84, 8559454, now());
+            insert into product (id, created_at, name, price, sku, updated_at) VALUES (116, now(), 'Casaco de Couro',
+            1509.84, 85510454, now());
+            insert into product (id, created_at, name, price, sku, updated_at) VALUES (1331, now(), 'Jaqueta de Pano',
+            13509.84, 85115454, now());
+            insert into product (id, created_at, name, price, sku, updated_at) VALUES (141, now(), 'Sapato de Pano',
+            1809.84, 85512454, now());
+            insert into product (id, created_at, name, price, sku, updated_at) VALUES (151, now(), 'Jaleco de Pano',
+            1609.84, 85513454, now());
+            insert into product (id, created_at, name, price, sku, updated_at) VALUES (161, now(), 'Carteira de Pano',
+            1079.84, 81455454, now());
+            insert into product (id, created_at, name, price, sku, updated_at) VALUES (171, now(), 'Casaco de Pano',
+            1093.84, 85515454, now());
+            insert into product (id, created_at, name, price, sku, updated_at) VALUES (181, now(), 'Camisa de Couro',
+            1029.84, 1855454, now());
+            insert into product (id, created_at, name, price, sku, updated_at) VALUES (91, now(), 'Pente de Couro',
+            1019.84, 2855454, now());
+            insert into product (id, created_at, name, price, sku, updated_at) VALUES (121, now(), 'Cobertor de Couro',
+            1509.84, 3855454, now());
+            insert into product (id, created_at, name, price, sku, updated_at) VALUES (511, now(), 'Oculos de Couro',
+            12309.84, 4855454, now());
+            insert into product (id, created_at, name, price, sku, updated_at) VALUES (131, now(), 'Relogio de Couro',
+            1039.84, 5855454, now());
+            insert into product (id, created_at, name, price, sku, updated_at) VALUES (191, now(), 'Pulseira de Couro',
+            1079.84, 6855454, now());
+        </sql>
+    </changeSet>
+    <changeSet id="2" author="leo-master">
+        <sql>
+            insert into customer (id, cpf, created_at, email, name, updated_at) values (200, 11130913988, now(),
+            '1@hotmail.com', 'Leonardo Golfeto', now());
+            insert into customer (id, cpf, created_at, email, name, updated_at) values (201, 11130913989, now(),
+            '12@hotmail.com', 'Joao Paulo', now());
+            insert into customer (id, cpf, created_at, email, name, updated_at) values (202, 11130913990, now(),
+            '12345@hotmail.com', 'Lucas Antonio', now());
+            insert into customer (id, cpf, created_at, email, name, updated_at) values (203, 11130913931, now(),
+            '123456@hotmail.com', 'Heitor', now());
+            insert into customer (id, cpf, created_at, email, name, updated_at) values (204,  11130913993, now(),
+            '321@hotmail.com', 'Marcia', now());
+            insert into customer (id, cpf, created_at, email, name, updated_at) values (205, 11130913984, now(),
+            '21@hotmail.com', 'Dona Maria', now());
+            insert into customer (id, cpf, created_at, email, name, updated_at) values (206,  11130913988, now(),
+            '42231@hotmail.com', 'Dona Julia', now());
+        </sql>
+    </changeSet>
+    <changeSet id="3" author="leo-master">
+        <sql>
+            insert into tb_order (id, created_at, customer_id, status, total) values (300, now(), 200, 'CONCLUDED', 284.5);
+            insert into tb_order (id, created_at, customer_id, status, total) values (301, now(), 201, 'CONCLUDED', 380.6);
+            insert into tb_order (id, created_at, customer_id, status, total) values (302, now(), 202, 'CONCLUDED', 450.5);
+            insert into tb_order (id, created_at, customer_id, status, total) values (303, now(), 203, 'CONCLUDED', 880.6);
+        </sql>
+    </changeSet>
+    <changeSet id="4" author="leo-master">
+        <sql>
+            insert into order_item (id, amount, order_id, price_unit, product_id, total) values (400, 10, 300, 999.5, 111 , 10000);
+            insert into order_item (id, amount, order_id, price_unit, product_id, total) values (401, 8, 300, 200, 112 , 0548.5);
+            insert into order_item (id, amount, order_id, price_unit, product_id, total) values (402, 10, 301, 385.9, 113 , 123123.5);
+            insert into order_item (id, amount, order_id, price_unit, product_id, total) values (403, 10, 301, 452.6, 114 , 9878.4);
+            insert into order_item (id, amount, order_id, price_unit, product_id, total) values (404, 10, 302, 389, 115 , 878787.6);
+            insert into order_item (id, amount, order_id, price_unit, product_id, total) values (405, 10, 302, 784.5, 116 , 8754.6);
+            insert into order_item (id, amount, order_id, price_unit, product_id, total) values (406, 10, 303, 259.5, 115 , 8745.7);
+            insert into order_item (id, amount, order_id, price_unit, product_id, total) values (407, 10, 303, 99.5, 112 , 954);
+        </sql>
+    </changeSet>
 </databaseChangeLog>

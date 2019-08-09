@@ -1,8 +1,6 @@
 package com.apicarrinhodecompra.products;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,13 +9,19 @@ import java.util.List;
 public class ProductService {
 
     @Autowired
-    ProductRepository productRepository;
+    ProductRepository repository;
 
     public List<Product> listarProdutos() {
-        return productRepository.findAll();
+        return repository.findAll();
     }
 
     public Product adicionarProduto(Product product) {
-        return productRepository.save(product);
+        return repository.save(product);
     }
+
+    public DTOProduct getProductByOrderId(Long orderId) {
+        return repository.getOne(orderId).getDto();
+    }
+
+    public Product getById(Long id) { return repository.getOne(id); }
 }

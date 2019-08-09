@@ -1,40 +1,36 @@
 package com.apicarrinhodecompra.products;
 
-import javax.persistence.*;
+import com.apicarrinhodecompra.BasicEntity.BasicEntity;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
 @Table(name = "PRODUCT", uniqueConstraints = {@UniqueConstraint(columnNames = {"sku"}), @UniqueConstraint(columnNames = {"name"}), @UniqueConstraint(columnNames = {"id"})})
-public class Product {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+public class Product extends BasicEntity {
 
     @NotNull(message = "Valor sku é Obrigatório !")
     private Long sku;
-
     @NotNull(message = "Valor nome é Obrigatório !")
     private String name;
-
     @Min(0)
     @NotNull(message = "Valor preco é Obrigatório !")
     private Double price;
-
     @NotNull(message = "Valor created_at é Obrigatório !")
     private Date created_at;
-
     @NotNull(message = "Valor updated_at é Obrigatório !")
     private Date updated_at;
 
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -76,5 +72,9 @@ public class Product {
 
     public void setUpdated_at(Date updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public DTOProduct getDto() {
+        return new DTOProduct(this.id, this.sku, this.name);
     }
 }

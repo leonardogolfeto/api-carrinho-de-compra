@@ -15,7 +15,7 @@ public class CustomerService {
        return repository.save(customer);
     }
 
-    public List<Customer> listarCustomers() {
-        return repository.findAll();
-    }
+    public List<Customer> listarCustomers() { return repository.findAll(); }
+
+    public Customer getById(Long id){ return repository.getOne(id); }
 }

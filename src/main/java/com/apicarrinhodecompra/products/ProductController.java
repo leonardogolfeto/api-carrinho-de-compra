@@ -20,11 +20,13 @@ public class ProductController {
 
     @RequestMapping(value = "/v1/products", method = RequestMethod.GET)
     public List<Product> listaProdutos() {
+
         return productService.listarProdutos();
     }
 
     @RequestMapping(value = "/v1/products", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Product> adicionarProduto(@RequestBody @Valid Product product) {
+
         return new ResponseEntity<>(productService.adicionarProduto(product), HttpStatus.CREATED);
     }
 }
